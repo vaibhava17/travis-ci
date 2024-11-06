@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "20"
+
+cache:
+  npm: true
+
+before_install:
+  - npm install
+
+script:
+  - npm run build
+  - npm run test
+
+deploy:
+  provider: script
+  script: npm run deploy
+  on:
+    branch: main

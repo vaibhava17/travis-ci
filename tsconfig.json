@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",                // Target ECMAScript 6
+    "module": "commonjs",            // CommonJS module system
+    "rootDir": "./src",              // Source code directory
+    "outDir": "./dist",              // Output directory for compiled code
+    "esModuleInterop": true,         // Allows importing CommonJS modules as ES6
+    "strict": true                   // Enables strict type-checking
+  }
+}
