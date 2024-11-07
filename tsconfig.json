@@ -1,10 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es6",                // Target ECMAScript 6
-    "module": "commonjs",            // CommonJS module system
-    "rootDir": "./src",              // Source code directory
-    "outDir": "./dist",              // Output directory for compiled code
-    "esModuleInterop": true,         // Allows importing CommonJS modules as ES6
-    "strict": true                   // Enables strict type-checking
-  }
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["es2018"],
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }

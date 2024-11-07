@@ -1,0 +1,53 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm up"
+    - duration: 120
+      arrivalRate: 10
+      name: "Load test"
+    - duration: 60
+      arrivalRate: 50
+      name: "Stress test"
+
+scenarios:
+  - name: "API Tests"
+    flow:
+      - get:
+          url: "/api/data"
+      - think: 1
+  - name: "API Load Test"
+    flow:
+      - get:
+          url: "/api/users/1"
+          capture:
+            - json: "$.id"
+              as: "userId"
+      - think: 1
+      - get:
+          url: "/api/users?ids=1,2,3"
+      - think: 1
+      - get:
+          url: "/metrics"
+
+version: 2.1
+
+jobs:
+  load-test:
+    docker:
+      - image: artilleryio/artillery:latest
+    steps:
+      - checkout
+      - run:
+          name: Run load tests
+          command: |
+            artillery run artillery-config.yml
+      - store_artifacts:
+          path: artillery-report.json
+
+workflows:
+  version: 2
+  load-test:
+    jobs:
+      - load-test

@@ -1,19 +1,26 @@
 {
-  "name": "turing-node",
+  "name": "node-perf-testing",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "dev": "ts-node src/index.ts",
-    "deploy": "render deploy --serviceId <your-service-id> --token <your-render-token>"
+    "profile:cpu": "ts-node src/utils/profiling.ts profileCPU",
+    "profile:memory": "ts-node src/utils/profiling.ts profileMemory",
+    "test:load": "artillery run artillery-config.yml",
+    "test": "jest",
+    "monitor": "node dist/server.js | pino-pretty"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.1"
+    "@types/ioredis": "^5.0.0",
+    "artillery": "^2.0.21",
+    "clinic": "^13.0.0",
+    "express": "^4.21.1",
+    "ioredis": "^5.4.1",
+    "nodemon": "^3.1.7"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
